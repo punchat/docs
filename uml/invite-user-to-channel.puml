@@ -4,9 +4,15 @@ actor AdminOfChannel
 actor Members
 actor NewMember
 
+
 AdminOfChannel -> Messaging: invite user
-Messaging -> Broker: create "user to channel invited event"
+Messaging -> AccountManagement: create user invite to channel
+AccountManagement -> AccountManagement: save data to db
+AccountManagement -> Broker: create "user to channel invited event"
 Broker -> Notifications: read "user to channel invited event"
+note right: with senderId, recipientId, channelId
+Notifications -> UAA: read info about sender and recipient
+Notifications -> Messaging: read info about channel
 
 alt email notifications enabled
     Notifications -> Notifications: generate email
@@ -24,7 +30,11 @@ alt ws notifications enabled
 end
 
 alt user accepts invitation
-    NewMember -> Messaging: accept invitation
+    NewMember -> AccountManagement: accept invitation
+    AccountManagement -> AccountManagement: change state
+    AccountManagement -> Broker: create "new member accept invitation event"
+    Broker -> Messaging: read "new member accept invitation event"
+    Messaging -> Messaging : add member
     Messaging -> Broker: create "user invited event"
     Broker -> Notifications: read "user invited event"
     Notifications -> Broker: create "new notification event(new member)"

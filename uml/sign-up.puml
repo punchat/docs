@@ -1,0 +1,47 @@
+@startuml
+
+actor Admin
+actor User
+
+Admin -> AccountManagement: invite user
+note right: with email
+AccountManagement -> AccountManagement: save data to db
+AccountManagement -> Broker: create event "new user invited event"
+Broker -> Notifications: read event
+note right: with email and senderId
+Notifications -> UAA: read info about sender
+Notifications -> Notifications: generate email
+Notifications -> Broker: create "new email event"
+Broker -> EmailSender: read "new email event"
+EmailSender -> User: send email
+alt user accepts invitation
+    User -> AccountManagement: send email
+    AccountManagement -> AccountManagement: check email
+    alt email valid
+        AccountManagement->AccountManagement: generate access code
+        AccountManagement -> Broker: create event "new access code"
+        Broker -> Notifications: read event
+        note right: with email and access code
+        Notifications -> Notifications: generate email
+        Notifications -> Broker: create "new email event"
+        Broker -> EmailSender: read "new email event"
+        EmailSender -> User: send email
+    end
+    User -> User: get access code from email
+    User -> AccountManagement: code validation
+    note right: with email, access code
+    alt access code valid
+        AccountManagement -> AccountManagement: change state
+        AccountManagement --> User: access code valid
+        User->UAA: register new user
+        note right: with email, username, password
+        UAA -> AccountManagement: check state by email
+        UAA -> Broker: create new event "user created event"
+        note left: with userId and email
+        ...
+        Broker -> Notifications: read event "user created event"
+        Notifications -> Notifications: create user with email
+        ...
+    end
+end
+@enduml
