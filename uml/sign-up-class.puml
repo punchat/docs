@@ -1,0 +1,65 @@
+@startuml
+
+class WorkspaceInvitation {
+    String email
+}
+
+note top of WorkspaceInvitation
+    when admin invites user
+    (POST .../am/workspace/members)
+end note
+
+class WorkspaceEmailValidation {
+    String email
+}
+
+note top of WorkspaceEmailValidation
+    when user checks email
+    (PUT .../am/workspace/members/check)
+end note
+
+class WorkspaceEmailValidationResult {
+    String email
+    EmailValidationResult result
+}
+
+note top of WorkspaceEmailValidationResult
+    response of (PUT .../am/workspace/members/check)
+end note
+
+enum EmailValidationResult {
+    VALID, INVALID
+}
+
+class WorkspaceAccessCodeValidation {
+    String email
+    String code
+}
+
+class WorkspaceAccessCodeValidationResult {
+    String email
+    String code
+    AccessCodeValidationResult result
+}
+
+enum AccessCodeValidationResult {
+    VALID, INVALID, OUTDATED
+}
+
+class NewAccessCodeRequest {
+    String email
+}
+
+note top of NewAccessCodeRequest
+    Request to get new access code in email
+    (PUT .../am/workspace/codes/request)
+end note
+
+class WorkspaceRegistration {
+    String email
+    String username
+    String password
+    String code
+}
+
+@enduml
