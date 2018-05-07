@@ -1,0 +1,56 @@
+@startuml
+
+
+class User {
+    Long id
+    String username
+}
+
+class BroadcastMessage {
+    Long id
+    Long channelId
+    Long senderId
+    User[] addressees
+    Long resourceId
+}
+
+class DirectMessage {
+    User sender
+    LocalDateTime sendingTime
+    User receiver
+    Long resourceId
+}
+
+class BroadcastChannel {
+    Long id
+    String name
+    Privacy privacy
+}
+
+class DirectChannel {
+    Long id
+    User user
+}
+
+enum Privacy {
+    PUBLIC, PRIVATE
+}
+
+class Member {
+    Long id
+    User user
+    Role role
+    BroadcastChannel channel
+}
+
+class Role {
+    Permission[] permissions
+}
+
+enum Permission {
+    CAN_INVITE_USERS,
+    CAN_EXCLUDE_USERS,
+    CAN_WRITE_MESSAGES
+}
+
+@enduml
