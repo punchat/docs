@@ -1,0 +1,504 @@
+{
+	"info": {
+		"name": "punchat",
+		"_postman_id": "d0f1dc5b-eec0-22d1-244a-dbf8d15decb0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "uaa",
+			"item": [
+				{
+					"name": "server",
+					"item": [
+						{
+							"name": "Get public key to validate jwt",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJzZXJ2ZXIiXSwiZXhwIjoxNTIyNjk4NDQyLCJqdGkiOiJiOGVmNmQ0OS1lOWE3LTQ3N2UtOGI5OC0zNjg2ZmVlOWE2MTMiLCJjbGllbnRfaWQiOiJhdXRoIn0.uqieFrZUOmblXTHeSCqW15zyfDwh9VVHC5LSOAm_2gYtumcZxxvqRzRTjW082LKwUjXxkucQK6m39nRez40ig1YTmNjY_skuTEZyfjbCSwh8rHoGh0BgkGk7Je0kZiYK727sB2sGqy2z3xh9K2EdOrn9QEUpWSv4lpIzLs2uR6zrD4VlQkI50lX-bJ0wwKIwFV40_R-jHASAbZuZd5ixv_lWwWY_6EfKsL8eZw4w0lz9z-xuKbZblwBTbbuTLGNlnyI7hM0irtambuEAafJd3ymRCmwlcTDku4QaXeExGSif2J5QLFCo-_TxRRI0c4VumyCw-mrtqUMm2oP4DhiEMg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/uaa/oauth/token_key",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"uaa",
+										"oauth",
+										"token_key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Snowflake Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJzZXJ2ZXIiXSwiZXhwIjoxNTIyNzA1MzU2LCJqdGkiOiI5NzA1NzQyZS1jYTJlLTQxMDEtYWQ4OS0yYjlkYzg3ZTZjYzYiLCJjbGllbnRfaWQiOiJhdXRoIn0.DyBMWgM8_9olr3E3_gQTXvbyMfeGJonAsWdcRcRqwPnPB31Dg3ZIPu5g9f282dW5YABRYmx8RO21JvRn1LbJD062yrHOggtthNbsbCLxVQAydpPhaBiE6wQ3t2X_aNQeMaM5xr6gCtG_F0U5XLcq71te8avsIWG6DFT-BqTm5274zUR8G3VRb0cCMs6KOrNemhSbTGiFFOCoE7TxBu19IudCs-eFTR-6ULCAUTKqced8p7cfJ9hdq7TKfT5uC8MC76w__dYAJRtDLhWY9RVu9X1fK4CAM5o3-TDUypgCj__0eyNbNHaZXVVGlqm0dvmEzzIQ1Qej2iUKrmyDV5WtPw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/id/id",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"id",
+										"id"
+									]
+								},
+								"description": "You should use trusted server token"
+							},
+							"response": []
+						},
+						{
+							"name": "Get server auth token",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "auth",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "pass",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"type": "any"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/uaa/oauth/token?grant_type=client_credentials&client_id=auth&scope=server",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"uaa",
+										"oauth",
+										"token"
+									],
+									"query": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials"
+										},
+										{
+											"key": "client_id",
+											"value": "auth"
+										},
+										{
+											"key": "scope",
+											"value": "server"
+										}
+									]
+								},
+								"description": "This is example of retreiving token of auth client"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "client",
+					"item": [
+						{
+							"name": "Create new account",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"{{username}}\",\n\t\"password\": \"pass\",\n\t\"code\": \"{{code}}\",\n\t\"email\": \"{{email}}\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/uaa/accounts",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"uaa",
+										"accounts"
+									]
+								},
+								"description": "Required fields:\n\tusername\n\tpassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Change password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjYxMDY5OTIsInVzZXIiOnsiaWQiOiI3NjIyNjUxMTMyNTk0MDk0MDgifSwidXNlcl9uYW1lIjoia29iem9uIiwianRpIjoiMmI0MmY0YTUtMDk2MS00Y2QyLWFkN2YtZmUwNThiMjI4NGYxIiwiY2xpZW50X2lkIjoiY2xpZW50Iiwic2NvcGUiOlsib3BlbmlkIl19.OBlFCZ0dq-NoMO7GAqc2fBvBaA5yRbqwrSzqT-LdK2EAtd_NfGe1EqiIiJgl_mjGa0KoaC3Rx-X0euZ0YegWvjzwx6nr6o03jrJ83kULv09GQhYwDGzrVw4AUvKtCLn1AI_ABtzkt2Olo9R_Le47OmdfiXPEH27VOm4Kr2z5iNOUYQsrxtnC6LCKVl5YBu7403i-aLbYL3w_tS0-qcuyY4KKFU1_CnQHuBiyX0P4hrddj2n6G6oTXLO76n3WyFw7WpROKB_EJBR-YqfTyb6QUgce_CuOOXNRCuwGaRYA9pb4_nn9088D93zCczz9BxP-o5aOYk4qftBRU4ZfSJ5mpA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"oldPassword\": \"pass\",\n    \"newPassword\": \"pass\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/uaa/accounts/@me/password",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"uaa",
+										"accounts",
+										"@me",
+										"password"
+									]
+								},
+								"description": "Required fields:\n  oldPassword\n    newPassword"
+							},
+							"response": []
+						},
+						{
+							"name": "Get OpenID token",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "client",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "secret",
+											"type": "string"
+										},
+										{
+											"key": "saveHelperData",
+											"type": "any"
+										},
+										{
+											"key": "showPassword",
+											"value": false,
+											"type": "boolean"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "client",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "openid",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pass",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/uaa/oauth/token",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"uaa",
+										"oauth",
+										"token"
+									]
+								},
+								"description": "grant_type:\n\tpassword\nscope:\n\topenid (may be changed in future)\nclient_id:\n\tclient (may be changed in future)\nsecret:\n\tsecret (may be changed in future)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "account-management",
+			"item": [
+				{
+					"name": "workspace",
+					"item": [
+						{
+							"name": "Create new invite",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"{{email}}\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/am/workspace/members/",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"am",
+										"workspace",
+										"members",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Email Validation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"{{email}}\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/am/workspace/members/check",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"am",
+										"workspace",
+										"members",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "access code",
+					"item": [
+						{
+							"name": "Request AccessCode",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"{{email}}\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/am/workspace/codes/request",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"am",
+										"workspace",
+										"codes",
+										"request"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AccessCode Validation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\":\"{{email}}\",\n\t\"code\":\"9816\"\n}"
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/am/workspace/codes/check",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"am",
+										"workspace",
+										"codes",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
