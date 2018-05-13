@@ -6,13 +6,16 @@ actor NewMember
 
 
 AdminOfChannel -> Messaging: invite user
-Messaging -> AccountManagement: create user invite to channel
-AccountManagement -> AccountManagement: save data to db
-AccountManagement -> Broker: create "user to channel invited event"
-Broker -> Notifications: read "user to channel invited event"
-note right: with senderId, recipientId, channelId
-Notifications -> UAA: read info about sender and recipient
-Notifications -> Messaging: read info about channel
+Messaging -> Messaging: permission check
+alt have permission
+    Messaging -> AccountManagement: create user invite to channel
+    AccountManagement -> AccountManagement: save data to db
+    AccountManagement -> Broker: create "user to channel invited event"
+    Broker -> Notifications: read "user to channel invited event"
+    note right: with senderId, recipientId, channelId
+    Notifications -> UAA: read info about sender and recipient
+    Notifications -> Messaging: read info about channel
+end
 
 alt email notifications enabled
     Notifications -> Notifications: generate email
